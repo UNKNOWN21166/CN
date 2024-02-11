@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<conio.h>
+#define VERTEX 5
+#define FALSE -1
+#define TRUE 1
+void create_graph(int [][VERTEX],int [][VERTEX],int []);
+void prims(int [][VERTEX],int [][VERTEX],int []);
+void display(int [][VERTEX]);
+void main(){
+int graph[VERTEX][VERTEX];
+int tree[VERTEX][VERTEX],selected[VERTEX];
+clrscr();
+create_graph(graph,tree,selected);
+prims(graph,tree,selected);
+display(tree);
+}
+void create_graph(int graph[][VERTEX],int tree[][VERTEX],int selected[]){
+int i,j;
+printf("\nIf there is No Edge B/W Two Nodes,It's Weight is 99");
+for(i = 0; i < VERTEX; i++) {
+for(j = 0; j < VERTEX; j++) {
+printf("\nEnter weight between %d Node %d Node",i,j);
+scanf("%d",&graph[i][j]);
+tree[i][j] = 0;
+}}
+for(i = 0; i<VERTEX; i++) {
+selected[i] = FALSE;
+}}
+void prims(int graph[][VERTEX], int tree[][VERTEX], int selected[VERTEX]){
+int ne = 1;
+int x,y;
+selected[0] = TRUE;
+while(ne < VERTEX) {
+int min = 99,i,j;
+for(i = 0; i < VERTEX; i++){
+if(selected[i] == TRUE) {
+for(j = 0; j<VERTEX; j++) {
+if(selected[j] == FALSE) {
+if(min > graph[i][j]){
+min = graph[i][j];
+x = i;
+y = j;
+}
+}
+}
+} }
+tree[x][y] = 1;
+tree[y][x] = 1;
+selected[y] = TRUE;
+ne++;
+}
+}
+void display(int tree[][VERTEX])
+{
+int i,j;
+printf("%6c",' ');
+for(i =0;i<VERTEX;i++)
+printf("%6d",i+1);
+printf("\n");
+for( i = 0; i<VERTEX; i++)
+{
+printf("%6d",i+1) ;
+for(j = 0; j<VERTEX; j++)
+printf("%6d",tree[i][j]);
+printf("\n");
+}
+}
